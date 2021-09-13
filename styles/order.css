@@ -68,9 +68,9 @@
 }
 
 .wrap .order-detail .order-detail-box .order-name {
-    font-size: .2rem;
+    font-size: .3rem;
     word-wrap: break-word;
-    line-height: 1.4em;
+    line-height: 2em;
     max-height: 2.8em;
     overflow: hidden;
     color: #353535;

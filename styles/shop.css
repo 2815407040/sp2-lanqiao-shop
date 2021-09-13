@@ -81,7 +81,8 @@
 
 .good_item {
     display: flex;
-    margin: .1rem 0 .1rem .2rem;
+    margin: .1rem .1rem .1rem .2rem;
+    border-bottom: 1px solid #eee;
 }
 
 .good_item img {
@@ -127,7 +128,7 @@
 
 .good_item .info .price {
     color: rgb(255, 83, 57);
-    font-size: 0.18rem;
+    font-size: 0.25rem;
 }
 
 .good_item .info .more {
@@ -144,7 +145,7 @@
 
 .good_item .info .more .action .num {
     margin: 0 .2rem;
-    font-size: .2rem;
+    font-size: .3rem;
     width: .3rem;
     height: .3rem;
     text-align: center;
@@ -158,7 +159,7 @@
     display: flex;
     position: absolute;
     top: 180px;
-    bottom: 46px;
+    bottom: 1rem;
     width: 100%;
     background-color: #eee;
     padding-top: 2px;

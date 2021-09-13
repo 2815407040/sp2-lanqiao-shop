@@ -14,10 +14,6 @@
 
 .wrap .order-address .address {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 700;
     user-select: none;
     cursor: pointer;
     margin: 1vw 0;
@@ -25,7 +21,7 @@
 
 .wrap .order-address .address p {
     width: 90%;
-    font-size: .4rem;
+    font-size: .35rem;
 }
 
 .wrap .order-address p {

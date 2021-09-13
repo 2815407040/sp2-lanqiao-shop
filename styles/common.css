@@ -98,6 +98,10 @@ a:focus {
     font-size: .25rem;
 }
 
+.tabcur {
+    color: #2d7eed;
+}
+
 
 /* 附近商家 start */
 
@@ -112,6 +116,7 @@ a:focus {
     color: #000;
     font-size: .3rem;
     width: 100%;
+    border-bottom: 1px solid #eee;
 }
 
 .shop .title h2 a {
