@@ -8,6 +8,10 @@
     height: 2.3rem;
 }
 
+.wrap .order-address h5 {
+    font-size: .3rem;
+}
+
 .wrap .order-address .address {
     width: 100%;
     display: flex;
@@ -25,7 +29,8 @@
 }
 
 .wrap .order-address p {
-    font-size: 3vw;
+    font-size: .3rem;
+    color: #fff;
 }
 
 .wrap h3 {
@@ -63,7 +68,7 @@
 }
 
 .wrap .order-detail li p {
-    font-size: .16rem;
+    font-size: .3rem;
 }
 
 .wrap .order-cost {
@@ -75,7 +80,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 3.5vw;
+    font-size: .3rem;
 }
 
 .wrap .total {

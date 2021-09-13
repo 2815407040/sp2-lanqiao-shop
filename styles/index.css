@@ -27,7 +27,7 @@
 .header input {
     height: 0.6rem;
     margin-top: 0.2rem;
-    font-size: 0.16rem;
+    font-size: 0.3rem;
     text-align: left;
     border: 0 none;
     padding-left: .5rem;
@@ -66,7 +66,7 @@
     display: block;
     text-align: center;
     overflow: hidden;
-    font-size: 0.3rem;
+    font-size: 0.2rem;
 }
 
 .menu_category ul li img {
