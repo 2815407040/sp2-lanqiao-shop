@@ -86,8 +86,8 @@
 
 .good_item img {
     margin-right: 0.1rem;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .good_item .info {
@@ -96,7 +96,7 @@
 }
 
 .good_item .info .name {
-    font-size: 0.16rem;
+    font-size: 0.3rem;
     font-weight: 700;
 }
 
@@ -197,6 +197,7 @@
     height: 1rem;
     line-height: 1rem;
     z-index: 10;
+    font-size: .3rem;
 }
 
 
@@ -243,7 +244,7 @@
     height: .3rem;
     line-height: .3rem;
     text-align: center;
-    font-size: .1rem;
+    font-size: .3rem;
     position: absolute;
     top: -.1rem;
     right: -.2rem;
@@ -255,7 +256,7 @@
     line-height: 0.8rem;
     background: #39b708;
     color: #fff;
-    font-size: 0.16rem;
+    font-size: 0.3rem;
     font-weight: 700;
     width: 1rem;
 }

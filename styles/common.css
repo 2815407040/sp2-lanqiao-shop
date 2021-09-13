@@ -115,7 +115,7 @@ a:focus {
 
 .shop .title h2 a {
     float: right;
-    font-size: .16rem;
+    font-size: .3rem;
 }
 
 .shop .tag {
@@ -142,8 +142,8 @@ a:focus {
 
 .shop_list .shop_info .shop_img {
     border: 1px solid #eeeeee;
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .shop_list .shop_main {

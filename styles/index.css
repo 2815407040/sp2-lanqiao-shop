@@ -16,7 +16,7 @@
 
 .header .address p {
     color: #fff;
-    font-size: 0.2rem;
+    font-size: 0.3rem;
 }
 
 .header .icon-dizhi {
@@ -66,11 +66,11 @@
     display: block;
     text-align: center;
     overflow: hidden;
-    font-size: 0.12rem;
+    font-size: 0.3rem;
 }
 
 .menu_category ul li img {
-    width: 0.6rem;
+    width: 0.8rem;
 }
 
 
