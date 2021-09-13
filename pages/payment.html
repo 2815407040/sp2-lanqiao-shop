@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="keywords" content="蓝桥到家">
+    <meta name="description" itemprop="description" content="生鲜副食、饮品乳品、鲜花蛋糕">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>在线支付</title>
+    <link rel="stylesheet" type="text/css" href="/styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/iconfont/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/payment.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/common.css" />
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script src="/js/zepto.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 头部 start -->
+        <header class="header_bar">
+            <a href="/pages/order-confirm.html">
+                <div class="header_bar_back"></div>
+            </a>
+            <div class="header_bar_title">在线支付</div>
+        </header>
+        <!-- 头部 end -->
+        <div class="container">
+            <!-- 订单信息部分 -->
+            <div class="order-info">
+                <p>
+                    永辉超市
+                    <i class="iconfont icon-xiajiantou" id="btnshow" style="font-size: .1rem;"></i>
+                </p>
+                <p>&#165; 24</p>
+            </div>
+
+            <!-- 订单明细部分 -->
+            <ul class="order-detail" id="detailetBox">
+                <li>
+                    <p>千禧小西红柿（500g) x 1</p>
+                    <p>&#165;9</p>
+                </li>
+                <li>
+                    <p>千禧小西红柿（500g) x 1</p>
+                    <p>&#165;9</p>
+                </li>
+                <li>
+                    <p>配送费</p>
+                    <p>&#165;6</p>
+                </li>
+            </ul>
+
+            <!-- 支付方式部分 -->
+            <ul class="payment-type">
+                <li>
+                    <img src="/images/common/alipay.png">
+                </li>
+                <li>
+                    <img src="/images/common/wechat.png">
+                </li>
+            </ul>
+            <div class="payment-button" onclick="location.href='/pages/order.html'">
+                <button>确认支付</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    $(function() {
+        $("#btnshow").click(function() {
+            $("#detailetBox").toggle();
+        })
+    })
+</script>
+
+</html>

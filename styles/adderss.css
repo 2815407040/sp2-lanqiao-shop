@@ -1,0 +1,67 @@
+/*地址列表*/
+
+.container {
+    background: #F8F8F8;
+}
+
+.address:first-child {
+    margin-top: 1.3rem;
+}
+
+.address {
+    padding: .4rem;
+    background: #fff;
+    font-size: .27rem;
+    position: relative;
+    margin: .2rem;
+}
+
+.header_bar_title a {
+    margin-left: 1.5rem;
+    font-size: 0.2rem;
+}
+
+.address .icon-youjiantou {
+    position: absolute;
+    right: .5rem;
+    top: .8rem;
+    font-size: .4rem;
+}
+
+
+/*添加地址*/
+
+.form {
+    padding: 0 0.2rem;
+    margin-top: 1.2rem;
+    background: #FFF;
+    border-top: 0.01rem solid #eee;
+    border-bottom: 0.01rem solid #eee;
+}
+
+.form_item {
+    display: flex;
+    padding: 0.2rem 0;
+    line-height: .6rem;
+    font-size: 0.2rem;
+    border-bottom: 0.01rem solid #eee;
+}
+
+.form_item input {
+    margin-left: .5rem;
+    width: 70%;
+    border: none;
+}
+
+.account {
+    text-align: center;
+    line-height: .8rem;
+    background: #39b708;
+    color: #fff;
+    font-size: 0.3rem;
+    width: 100%;
+    border: none;
+    float: right;
+    position: fixed;
+    bottom: 0;
+}

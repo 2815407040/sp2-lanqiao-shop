@@ -1,0 +1,50 @@
+.wrap .order-info {
+    margin-top: 1rem;
+    padding: .3rem;
+    font-size: .29rem;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrap .order-info p:last-child {
+    color: red;
+}
+
+.wrap .order-detail li {
+    width: 100%;
+    box-sizing: border-box;
+    padding: .1rem .3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrap .payment-type li {
+    width: 100%;
+    padding: .3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrap .payment-type li img {
+    width: 2rem;
+    height: .55rem;
+}
+
+.wrap .payment-button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wrap .payment-button button {
+    width: 100%;
+    height: .8rem;
+    border: none;
+    outline: none;
+    background-color: #39b708;
+    color: #fff;
+    font-size: .3rem;
+}
