@@ -49,13 +49,14 @@
 
 .form_item input {
     margin-left: .5rem;
+    font-size: .3rem;
     width: 70%;
     border: none;
 }
 
 .account {
     text-align: center;
-    line-height: .8rem;
+    line-height: 1rem;
     background: #39b708;
     color: #fff;
     font-size: 0.3rem;

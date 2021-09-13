@@ -37,6 +37,7 @@
 .header .search-words {
     display: flex;
     justify-content: space-around;
+    font-size: .25rem;
 }
 
 .header .search-words a {
@@ -66,7 +67,7 @@
     display: block;
     text-align: center;
     overflow: hidden;
-    font-size: 0.2rem;
+    font-size: 0.25rem;
 }
 
 .menu_category ul li img {

@@ -30,7 +30,7 @@
 
 .wrap .order-address p {
     font-size: .3rem;
-    color: #fff;
+    color: #fff !important;
 }
 
 .wrap h3 {
@@ -85,7 +85,7 @@
 
 .wrap .total {
     width: 100%;
-    height: .8rem;
+    height: 1rem;
     position: fixed;
     left: 0;
     bottom: 0;
