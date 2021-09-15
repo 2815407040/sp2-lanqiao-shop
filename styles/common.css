@@ -54,7 +54,7 @@ a:focus {
     display: block;
     width: 1rem;
     height: 1rem;
-    background: url(/images/common/left.png) no-repeat 50%;
+    background: url(../images/common/left.png) no-repeat 50%;
     background-size: .4rem .4rem;
 }
 

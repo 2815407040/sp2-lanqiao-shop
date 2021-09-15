@@ -8,18 +8,18 @@
     <meta name="description" itemprop="description" content="生鲜副食、饮品乳品、鲜花蛋糕">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>确认订单</title>
-    <link rel="stylesheet" type="text/css" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/styles/iconfont/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="/styles/order-confirm.css" />
-    <link rel="stylesheet" type="text/css" href="/styles/common.css" />
-    <script type="text/javascript" src="/js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/iconfont/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/order-confirm.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/common.css" />
+    <script type="text/javascript" src="../js/common.js"></script>
 </head>
 
 <body>
     <div class="wrap">
         <!-- 头部 start -->
         <header class="header_bar">
-            <a href="/pages/shopcart.html">
+            <a href="shopcart.html">
                 <div class="header_bar_back"></div>
             </a>
             <div class="header_bar_title">确认订单</div>
@@ -29,10 +29,13 @@
             <!-- 订单信息 start -->
             <div class="order-address">
                 <h5>配送至：</h5>
-                <div class="address">
-                    <p>北京昌平区立水桥南1号</p>
-                    <p>李雷雷 13161626306</p>
-                </div>
+                <a href="address.html">
+                    <div class="address">
+                        <p>北京昌平区立水桥南1号</p>
+                        <p>李雷雷 13161626306</p>
+                        <span class="iconfont icon-youjiantou"></span>
+                    </div>
+                </a>
             </div>
 
             <h3>永辉超市</h3>
@@ -40,21 +43,21 @@
             <ul class="order-detail">
                 <li>
                     <div class="goods">
-                        <img src="/images/goods/qx.jpg">
+                        <img src="../images/goods/qx.jpg">
                         <p>千禧小西红柿（500g) x 1</p>
                     </div>
                     <p>&#165; 6.9</p>
                 </li>
                 <li>
                     <div class="goods">
-                        <img src="/images/goods/gm.jpg">
+                        <img src="../images/goods/gm.jpg">
                         <p>龙须挂面1kg x 1</p>
                     </div>
                     <p>&#165; 7.9</p>
                 </li>
                 <li>
                     <div class="goods">
-                        <img src="/images/goods/snh.jpg">
+                        <img src="../images/goods/snh.jpg">
                         <p>收纳盒(喜得龙) x 1</p>
                     </div>
                     <p>&#165; 16.9</p>
@@ -71,7 +74,7 @@
                 <div class="total-left">
                     总计：37.7 元
                 </div>
-                <div class="total-right" onclick="location.href='/pages/payment.html'">
+                <div class="total-right" onclick="location.href='payment.html'">
                     去支付
                 </div>
             </div>

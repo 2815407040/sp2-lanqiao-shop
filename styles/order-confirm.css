@@ -110,3 +110,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.wrap .icon-youjiantou {
+    right: .5rem;
+    position: absolute;
+    top: 2rem;
+    font-size: .5rem;
+    color: #fff;
+}

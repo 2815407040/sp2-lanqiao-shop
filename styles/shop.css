@@ -1,7 +1,7 @@
 /* 商家主页-头部 */
 
 .shop_info {
-    background: url('/images/shop/yhbg.jpg') center;
+    background: url('../images/shop/yhbg.jpg') center;
     height: 3.8rem;
     background-size: cover;
     color: #eee;
