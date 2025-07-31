@@ -12,46 +12,127 @@
     <link rel="stylesheet" type="text/css" href="../styles/login.css">
     <link rel="stylesheet" type="text/css" href="../styles/common.css" />
     <script src="../js/common.js"></script>
+    <!-- 确保引入Zepto -->
+    <script src="../js/zepto.min.js"></script>
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="container">
-            <!-- logo start-->
-            <div class="header_logo">
-                <img src="https://static.shiyanlou.com/lanqiao/frontend/dist/img/lanqiao-logo.1bbdf85.svg" />
-            </div>
-            <!-- logo end -->
-            <!-- 注册 start-->
-            <div class="login_item">
-                <span class="login_text">手机号</span>
-                <input class="login_input" type="tel" maxlength="11" placeholder="输入手机号" />
-            </div>
-            <div class="login_item">
-                <span class="login_text">验证码</span>
-                <div class="auth_div">
-                    <input class="login_input" type="text" maxlength="4" placeholder="输入验证码" />
-                    <div class="code">
-                        <span>获取验证码</span>
-                    </div>
+<div class="wrap">
+    <div class="container">
+        <!-- logo start-->
+        <div class="header_logo">
+            <img src="https://static.shiyanlou.com/lanqiao/frontend/dist/img/lanqiao-logo.1bbdf85.svg" />
+        </div>
+        <!-- logo end -->
+        <!-- 注册 start-->
+        <div class="login_item">
+            <span class="login_text">手机号</span>
+            <input class="login_input" id="phone" type="tel" maxlength="11" placeholder="输入手机号" />
+        </div>
+        <div class="login_item">
+            <span class="login_text">验证码</span>
+            <div class="auth_div">
+                <!-- 验证码改为6位 -->
+                <input class="login_input" id="code" type="text" maxlength="6" placeholder="输入验证码" />
+                <div class="code">
+                    <span id="getCode">获取验证码</span>
                 </div>
             </div>
-            <div class="login_item">
-                <span class="login_text">密码</span>
-                <input class="login_input" type="password" maxlength="11" placeholder="设置您的登录密码" />
-            </div>
-            <div class="login_button">
-                <a href="login.html"><span>注册</span></a>
-            </div>
-            <div class="register_div">
-                <a href="login.html" class="register_text">
-                已有账号，请登录
-			</a>
-            </div>
-            <!-- 注册 end-->
-
         </div>
+        <div class="login_item">
+            <span class="login_text">密码</span>
+            <input class="login_input" id="password" type="password" maxlength="16" placeholder="设置您的登录密码（6-16位）" />
+        </div>
+        <div class="login_button">
+            <a href="javascript:;" id="registerBtn"><span>注册</span></a>
+        </div>
+        <div class="register_div">
+            <a href="login.html" class="register_text">
+                已有账号，请登录
+            </a>
+        </div>
+        <!-- 注册 end-->
+
     </div>
+</div>
+
+<!-- 替换原注册逻辑的script代码 -->
+<script>
+    $(function() {
+        // 验证码倒计时逻辑（保持不变）
+        let countdown = 60;
+        $('#getCode').click(function() {
+            const phone = $('#phone').val().trim();
+            if (!phone || phone.length !== 11) {
+                alert('请输入有效的11位手机号');
+                return;
+            }
+            alert('验证码已发送，验证码为123456');
+            const codeBtn = $(this);
+            codeBtn.attr('disabled', true).css('opacity', 0.6);
+            const timer = setInterval(() => {
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    codeBtn.text('获取验证码').attr('disabled', false).css('opacity', 1);
+                    countdown = 60;
+                } else {
+                    codeBtn.text(`重新发送(${countdown}s)`);
+                    countdown--;
+                }
+            }, 1000);
+        });
+
+        // 注册逻辑（修正POST请求格式）
+        $('#registerBtn').click(function() {
+            const phone = $('#phone').val().trim();
+            const code = $('#code').val().trim();
+            const password = $('#password').val().trim();
+
+            // 表单验证（保持不变）
+            if (!phone || phone.length !== 11) {
+                alert('请输入有效的11位手机号');
+                return;
+            }
+            if (code !== '123456') {
+                alert('验证码错误，请输入123456');
+                return;
+            }
+            if (password.length < 6 || password.length > 16) {
+                alert('密码长度必须为6-16位');
+                return;
+            }
+
+            // 检查手机号是否已注册
+            $.get('http://localhost:3000/users?phone=' + phone, function(users) {
+                if (users.length > 0) {
+                    alert('该手机号已注册');
+                    return;
+                }
+
+                // 发送POST请求到JSON Server（指定Content-Type）
+                $.ajax({
+                    url: 'http://localhost:3000/users',
+                    type: 'POST',
+                    contentType: 'application/json', // 关键：指定JSON格式
+                    data: JSON.stringify({ // 转换为JSON字符串
+                        phone: phone,
+                        password: password,
+                        registerTime: new Date().toLocaleString()
+                    }),
+                    success: function() {
+                        alert('注册成功！即将跳转到登录页');
+                        window.location.href = 'login.html';
+                    },
+                    error: function(xhr) {
+                        alert('注册失败：' + xhr.statusText);
+                    }
+                });
+            }).fail(function(xhr) {
+                alert('查询失败：' + xhr.statusText);
+            });
+        });
+    });
+</script>
 </body>
 
 </html>
