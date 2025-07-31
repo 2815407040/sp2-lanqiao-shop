@@ -1,0 +1,109 @@
+{
+  "shop_list": [
+    {
+      "name": "永辉超市-搜秀城店",
+      "img": "images/shop/yh.jpg",
+      "sales": "月销1000+",
+      "deliveryInfo": {
+        "minOrderAmount": "￥0",
+        "deliveryFee": "￥5",
+        "distance": "1.8km",
+        "time": "41分钟"
+      },
+      "activities": [
+        {
+          "type": "特",
+          "desc": "特价商品1元起"
+        },
+        {
+          "type": "减",
+          "desc": "满99减98，满199减198"
+        }
+      ]
+    },
+    {
+      "name": "喜茶-东方广场店",
+      "img": "images/shop/xc.png",
+      "sales": "月销2000+",
+      "deliveryInfo": {
+        "minOrderAmount": "￥20",
+        "deliveryFee": "￥6",
+        "distance": "1km",
+        "time": "20分钟"
+      },
+      "activities": [
+        {
+          "type": "特",
+          "desc": "芒果芝芝 19元起"
+        },
+        {
+          "type": "减",
+          "desc": "满120减59"
+        }
+      ]
+    },
+    {
+      "name": "华润万家-时代广场店",
+      "img": "images/shop/hrwj.jpg",
+      "sales": "月销1500+",
+      "deliveryInfo": {
+        "minOrderAmount": "￥30",
+        "deliveryFee": "￥4",
+        "distance": "2.3km",
+        "time": "35分钟"
+      },
+      "activities": [
+        {
+          "type": "折",
+          "desc": "全场商品8折起"
+        },
+        {
+          "type": "减",
+          "desc": "满150减60"
+        }
+      ]
+    },
+    {
+      "name": "每日优鲜-阳光花园店",
+      "img": "images/shop/mryx.jpg",
+      "sales": "月销3000+",
+      "deliveryInfo": {
+        "minOrderAmount": "￥15",
+        "deliveryFee": "￥3",
+        "distance": "0.8km",
+        "time": "15分钟"
+      },
+      "activities": [
+        {
+          "type": "特",
+          "desc": "新鲜水果9.9元/斤"
+        },
+        {
+          "type": "赠",
+          "desc": "满88元赠进口酸奶一盒"
+        }
+      ]
+    },
+    {
+      "name": "屈臣氏-星光大道店",
+      "img": "images/shop/qcs.jpg",
+      "sales": "月销1200+",
+      "deliveryInfo": {
+        "minOrderAmount": "￥50",
+        "deliveryFee": "￥8",
+        "distance": "3.5km",
+        "time": "50分钟"
+      },
+      "activities": [
+        {
+          "type": "减",
+          "desc": "满200减100"
+        },
+        {
+          "type": "换",
+          "desc": "加10元换购指定面膜"
+        }
+      ]
+    }
+  ]
+}
