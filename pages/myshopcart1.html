@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>我的购物车</title>
+    <style>
+        .cart-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .store {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .item-img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+        }
+        .item-info {
+            flex: 1;
+        }
+        .item-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .item-desc {
+            font-size: 12px;
+            color: #999;
+        }
+        .item-sales {
+            font-size: 12px;
+            color: #999;
+        }
+        .item-price {
+            font-size: 14px;
+            color: #f44336;
+            margin-top: 4px;
+        }
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+        .quantity button {
+            width: 26px;
+            height: 26px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+        }
+        .quantity input {
+            width: 40px;
+            height: 26px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 0 4px;
+            font-size: 14px;
+        }
+        .total {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #f44336;
+        }
+        .checkout {
+            width: 100%;
+            padding: 10px;
+            background: #00c853;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="cart-container">
+    <h2>我的购物车</h2>
+    <div class="store">永辉超市-搜秀城店</div>
+
+    <!-- 商品列表 -->
+    <div id="cartItems">
+        <!-- JavaScript 动态渲染 -->
+    </div>
+
+    <!-- 总价 -->
+    <div class="total" id="totalPrice">总价: ¥0.00</div>
+
+    <!-- 去结算按钮 -->
+    <button class="checkout" onclick="goToConfirmOrder()">去结算</button>
+</div>
+
+<!-- 模拟购物车数据（实际可从 localStorage 读取） -->
+<script>
+    // 初始化购物车数据（优先从 localStorage 读取）
+    let cartData = JSON.parse(localStorage.getItem('cartData')) || [
+        {
+            id: 1,
+            name: '千禧西红柿(500g)',
+            desc: '饭后解腻佳品',
+            price: 6.9,
+            sales: 176,
+            rating: '96%',
+            image: "../images/goods/qx.jpg",
+            quantity: 1,
+        },
+        {
+            id: 2,
+            name: '龙须挂面1kg',
+            desc: '居家必备',
+            price: 7.9,
+            sales: 100,
+            rating: '98%',
+            image: "../images/goods/gm.jpg",
+            quantity: 1,
+        },
+        {
+            id: 3,
+            name: '收纳盒(喜得龙)',
+            desc: '空间最大化利用',
+            price: 16.9,
+            sales: 16,
+            rating: '90%',
+            image: '../images/goods/snh.jpg',
+            quantity: 1,
+        },
+    ];
+
+    // 渲染购物车
+    function renderCart() {
+        const cartItemsDom = document.getElementById('cartItems');
+        const totalPriceDom = document.getElementById('totalPrice');
+        let total = 0;
+
+        cartItemsDom.innerHTML = ''; // 清空旧数据
+
+        cartData.forEach((item, index) => {
+            total += item.price * item.quantity;
+
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="item-img" />
+          <div class="item-info">
+            <div class="item-name">${item.name}</div>
+            <div class="item-desc">${item.desc}</div>
+            <div class="item-sales">月售${item.sales}  好评率${item.rating}</div>
+            <div class="item-price">¥${item.price}</div>
+          </div>
+          <div class="quantity">
+            <button onclick="decrement(${index})">-</button>
+            <input type="number" value="${item.quantity}" oninput="handleInput(${index}, event)">
+            <button onclick="increment(${index})">+</button>
+          </div>
+        `;
+            cartItemsDom.appendChild(itemDiv);
+        });
+
+        // 更新总价
+        totalPriceDom.textContent = `总价: ¥${total.toFixed(2)}`;
+
+        // 保存到 localStorage
+        localStorage.setItem('cartData', JSON.stringify(cartData));
+    }
+
+    // 减少数量
+    function decrement(index) {
+        if (cartData[index].quantity > 1) {
+            cartData[index].quantity--;
+            renderCart();
+        }
+    }
+
+    // 增加数量
+    function increment(index) {
+        cartData[index].quantity++;
+        renderCart();
+    }
+
+    // 输入框修改数量
+    function handleInput(index, event) {
+        const newQuantity = parseInt(event.target.value);
+        if (newQuantity >= 1) {
+            cartData[index].quantity = newQuantity;
+            renderCart();
+        }
+    }
+
+    // 跳转到确认订单页（传递店铺信息，地址可写死或从 localStorage 取）
+    function goToConfirmOrder() {
+        // 传递店铺名称（示例）
+        const storeName = '永辉超市-搜秀城店';
+        // 跳转并携带参数
+        window.location.href = `myorder.html?store=${encodeURIComponent(storeName)}`;
+    }
+
+    // 初始化渲染
+    renderCart();
+</script>
+</body>
+</html>

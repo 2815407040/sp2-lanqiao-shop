@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>确认订单</title>
+    <style>
+        .order-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .back {
+            font-size: 20px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .delivery {
+            background: #4285f4;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .store {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .item-img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+        }
+        .item-info {
+            flex: 1;
+        }
+        .item-name {
+            font-size: 14px;
+        }
+        .item-price {
+            font-size: 14px;
+            color: #f44336;
+        }
+        .delivery-fee {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+        .total {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #f44336;
+        }
+        .pay {
+            width: 100%;
+            padding: 10px;
+            background: #00c853;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="order-container">
+    <div class="back" onclick="goBack()">←</div>
+    <h2>确认订单</h2>
+
+    <!-- 配送信息（写死示例，实际可从 localStorage 取） -->
+    <div class="delivery">
+        <div class="delivery-title">配送至:</div>
+        <div class="delivery-address">北京昌平区立水桥南1号</div>
+        <div class="delivery-contact">李雷雷 13161626306</div>
+    </div>
+
+    <!-- 店铺信息（从 URL 参数读取） -->
+    <div class="store" id="storeName">永辉超市</div>
+
+    <!-- 商品列表（从 localStorage 读取） -->
+    <div id="orderItems">
+        <!-- JavaScript 动态渲染 -->
+    </div>
+
+    <!-- 配送费（写死示例） -->
+    <div class="delivery-fee">配送费: ¥6</div>
+
+    <!-- 总计 -->
+    <div class="total" id="totalPrice">总计: ¥0.00</div>
+
+    <!-- 去支付按钮 -->
+    <button class="pay" onclick="goToPay()">去支付</button>
+</div>
+
+<script>
+    // 从 URL 参数读取店铺名称
+    const urlParams = new URLSearchParams(window.location.search);
+    const storeName = urlParams.get('store') || '永辉超市';
+    document.getElementById('storeName').textContent = storeName;
+
+    // 从 localStorage 读取购物车数据
+    const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+
+    // 渲染确认订单
+    function renderOrder() {
+        const orderItemsDom = document.getElementById('orderItems');
+        const totalPriceDom = document.getElementById('totalPrice');
+        let total = 0;
+
+        orderItemsDom.innerHTML = ''; // 清空旧数据
+
+        cartData.forEach((item) => {
+            total += item.price * item.quantity;
+
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="item-img" />
+          <div class="item-info">
+            <div class="item-name">${item.name} x ${item.quantity}</div>
+            <div class="item-price">¥${(item.price * item.quantity).toFixed(2)}</div>
+          </div>
+        `;
+            orderItemsDom.appendChild(itemDiv);
+        });
+
+        // 加上配送费（写死 6 元）
+        total += 6;
+        totalPriceDom.textContent = `总计: ¥${total.toFixed(2)}`;
+    }
+
+    // 返回购物车页
+    function goBack() {
+        window.location.href = 'cart.html';
+    }
+
+    // 模拟支付
+    function goToPay() {
+        alert('跳转到支付页面');
+    }
+
+    // 初始化渲染
+    renderOrder();
+</script>
+</body>
+</html>
