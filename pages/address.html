@@ -13,42 +13,86 @@
     <link rel="stylesheet" type="text/css" href="../styles/adderss.css" />
     <link rel="stylesheet" type="text/css" href="../styles/common.css" />
     <script type="text/javascript" src="../js/common.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../js/zepto.min.js"></script>
 </head>
 
 <body>
-    <div class="wrap">
-
-        <!-- 头部 start -->
-        <header class="header_bar">
-            <a href="user.html">
-                <div class="header_bar_back"></div>
-            </a>
-            <div class="header_bar_title">管理收货地址</div>
-        </header>
-        <!-- 头部 end -->
-        <div class="container">
-            <!-- 地址列表 start -->
-            <div class="address" onclick="location.href='add-address.html'">
-                <p>李雷雷</p>
-                <p>13161626364</p>
-                <p>北京市昌平区立水桥东路1号</p>
-                <span class="iconfont icon-youjiantou"></span>
-            </div>
-            <!-- 地址列表 end -->
-            <!-- 地址列表 start -->
-            <div class="address" onclick="location.href='add-address.html'">
-                <p>韩梅梅</p>
-                <p>13161626334</p>
-                <p>北京市崇文门东大街1号</p>
-                <span class="iconfont icon-youjiantou"></span>
-            </div>
-            <!-- 地址列表 end -->
+<div class="wrap" id="app">
+    <!-- 头部 start -->
+    <header class="header_bar">
+        <a href="user.html">
+            <div class="header_bar_back"></div>
+        </a>
+        <div class="header_bar_title">管理收货地址</div>
+    </header>
+    <!-- 头部 end -->
+    <div class="container">
+        <!-- 地址列表 start -->
+        <div class="address" v-for="addr in addresses" :key="addr.id" @click="editAddress(addr.id)">
+            <p>{{ addr.contactName }}</p>
+            <p>{{ addr.phone }}</p>
+            <p>{{ addr.province }} {{ addr.detail }}</p>
+            <span class="iconfont icon-youjiantou"></span>
         </div>
-        <div class="">
-            <button class="account" onclick="location.href='add-address.html'">新建收货地址</button>
+        <!-- 地址列表 end -->
+
+        <!-- 无地址提示 -->
+        <div v-if="addresses.length === 0" class="no-address">
+            <p>暂无收货地址</p>
         </div>
     </div>
+    <div class="">
+        <button class="account" onclick="location.href='add-address.html'">新建收货地址</button>
+    </div>
+</div>
 
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                addresses: [],
+                userId: null
+            }
+        },
+        mounted() {
+            // 获取当前登录用户信息
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                try {
+                    const user = JSON.parse(loggedInUser);
+                    this.userId = user.id;
+                    this.loadAddresses();
+                } catch (e) {
+                    console.error('解析用户信息失败', e);
+                    alert('请先登录');
+                    window.location.href = 'login.html';
+                }
+            } else {
+                alert('请先登录');
+                window.location.href = 'login.html';
+            }
+        },
+        methods: {
+            async loadAddresses() {
+                try {
+                    const response = await fetch(`http://localhost:3000/users/${this.userId}`);
+                    const user = await response.json();
+                    this.addresses = user.addresses || [];
+                } catch (error) {
+                    console.error('加载地址失败', error);
+                    alert('加载地址失败，请重试');
+                }
+            },
+            editAddress(addressId) {
+                // 这里可以实现编辑地址功能，当前仅跳转到添加页面
+                window.location.href = `add-address.html?addressId=${addressId}`;
+            }
+        }
+    }).mount('#app');
+</script>
 </body>
 
 </html>

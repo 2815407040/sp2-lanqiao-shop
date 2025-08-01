@@ -13,11 +13,13 @@
     <link rel="stylesheet" type="text/css" href="../styles/common.css" />
     <script src="../js/common.js"></script>
     <script src="../js/zepto.min.js"></script>
+    <!-- 引入Vue3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
 <div class="wrap">
-    <div class="container">
+    <div class="container" id="app">
         <!-- logo start-->
         <div class="header_logo">
             <img src="https://static.shiyanlou.com/lanqiao/frontend/dist/img/lanqiao-logo.1bbdf85.svg" />
@@ -25,119 +27,150 @@
         <!-- logo end -->
 
         <ul class="login_tab">
-            <li class="cur"> <span>验证码登录</span> </li>
-            <li> <span>密码登录</span> </li>
+            <li :class="{cur: activeTab === 0}" @click="activeTab = 0"> <span>验证码登录</span> </li>
+            <li :class="{cur: activeTab === 1}" @click="activeTab = 1"> <span>密码登录</span> </li>
         </ul>
         <!-- 登录 start-->
         <ul class="login_show">
-            <li class="cur">
+            <li :class="{cur: activeTab === 0}">
                 <div class="login_item">
                     <span class="login_text">手机号</span>
-                    <input class="login_input" id="codeLoginPhone" type="tel" maxlength="11" value="18712341234" placeholder="输入手机号" />
+                    <input class="login_input" v-model="codeLoginPhone" type="tel" maxlength="11" placeholder="输入手机号" />
                 </div>
                 <div class="login_item">
                     <span class="login_text">验证码</span>
                     <div class="auth_div">
-                        <input class="login_input" id="loginCode" type="text" maxlength="6" placeholder="输入验证码" />
+                        <input class="login_input" v-model="loginCode" type="text" maxlength="6" placeholder="输入验证码" />
                         <div class="code">
-                            <span>获取验证码</span>
+                            <span @click="getCode" :disabled="isDisabled" :style="{opacity: isDisabled ? 0.6 : 1}">{{ codeText }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="login_button">
-                    <a href="javascript:;" id="codeLoginBtn"><span>登录</span></a>
+                    <a href="javascript:;" @click="codeLogin"><span>登录</span></a>
                 </div>
             </li>
-            <li>
+            <li :class="{cur: activeTab === 1}">
                 <div class="login_item">
                     <span class="login_text">手机号</span>
-                    <input class="login_input" id="pwdLoginPhone" type="tel" maxlength="11" placeholder="输入手机号" />
+                    <input class="login_input" v-model="pwdLoginPhone" type="tel" maxlength="11" placeholder="输入手机号" />
                 </div>
                 <div class="login_item">
                     <span class="login_text">密码</span>
-                    <input class="login_input" id="loginPassword" type="password" maxlength="12" placeholder="输入密码" />
+                    <input class="login_input" v-model="loginPassword" type="password" maxlength="12" placeholder="输入密码" />
                 </div>
                 <div class="login_button">
-                    <a href="javascript:;" id="pwdLoginBtn"><span>登录</span></a>
+                    <a href="javascript:;" @click="pwdLogin"><span>登录</span></a>
                 </div>
             </li>
         </ul>
         <!-- 登录 end-->
         <div class="register_div">
-            <a class="register_text" href="register.html">注册账号</a></div>
+            <a class="register_text" href="register.html">注册账号</a>
+        </div>
     </div>
 </div>
-<!-- 替换原script标签内的代码 -->
+
 <script>
-    $(function() {
-        // 切换登录类型（保持不变）
-        $('.login_tab li').click(function() {
-            if ($(this).hasClass('cur')) {
-                return;
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                activeTab: 0,
+                codeLoginPhone: '',
+                loginCode: '',
+                pwdLoginPhone: '',
+                loginPassword: '',
+                countdown: 60,
+                isDisabled: false,
+                codeText: '获取验证码'
             }
-            $(this).addClass('cur').siblings().removeClass('cur');
-            var i = $(this).index();
-            $(".login_show > li").eq(i).addClass('cur').siblings().removeClass('cur');
-        });
-
-        // 验证码登录（改为请求JSON Server）
-        $('#codeLoginBtn').click(function() {
-            const phone = $('#codeLoginPhone').val().trim();
-            const code = $('#loginCode').val().trim();
-
-            if (!phone || phone.length !== 11) {
-                alert('请输入有效的手机号');
-                return;
-            }
-
-            if (code !== '123456') {
-                alert('验证码错误，请输入123456');
-                return;
-            }
-
-            // 从JSON Server查询用户
-            $.get('http://localhost:3000/users?phone=' + phone, function(users) {
-                if (users.length === 0) {
-                    alert('该手机号未注册，请先注册');
+        },
+        methods: {
+            getCode() {
+                if (!this.codeLoginPhone || this.codeLoginPhone.length !== 11) {
+                    alert('请输入有效的11位手机号');
                     return;
                 }
-                // 登录成功，记录状态并跳转
-                localStorage.setItem('loggedInUser', phone); // 仅记录登录状态，不存储完整数据
-                window.location.href = '../index.html';
-            }).fail(function(xhr) {
-                alert('登录失败：' + xhr.statusText);
-            });
-        });
 
-        // 密码登录（改为请求JSON Server）
-        $('#pwdLoginBtn').click(function() {
-            const phone = $('#pwdLoginPhone').val().trim();
-            const password = $('#loginPassword').val().trim();
+                alert('验证码已发送，验证码为123456');
+                this.isDisabled = true;
 
-            if (!phone || phone.length !== 11) {
-                alert('请输入有效的手机号');
-                return;
-            }
+                const timer = setInterval(() => {
+                    if (this.countdown <= 0) {
+                        clearInterval(timer);
+                        this.codeText = '获取验证码';
+                        this.isDisabled = false;
+                        this.countdown = 60;
+                    } else {
+                        this.codeText = `重新发送(${this.countdown}s)`;
+                        this.countdown--;
+                    }
+                }, 1000);
+            },
+            async codeLogin() {
+                const phone = this.codeLoginPhone.trim();
+                const code = this.loginCode.trim();
 
-            if (!password) {
-                alert('请输入密码');
-                return;
-            }
-
-            // 从JSON Server查询匹配的用户
-            $.get('http://localhost:3000/users?phone=' + phone + '&password=' + password, function(users) {
-                if (users.length === 0) {
-                    alert('手机号或密码错误');
+                if (!phone || phone.length !== 11) {
+                    alert('请输入有效的手机号');
                     return;
                 }
-                // 登录成功，记录状态并跳转
-                localStorage.setItem('loggedInUser', phone);
-                window.location.href = '../index.html';
-            }).fail(function(xhr) {
-                alert('登录失败：' + xhr.statusText);
-            });
-        });
-    });
+
+                if (code !== '123456') {
+                    alert('验证码错误，请输入123456');
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`http://localhost:3000/users?phone=${phone}`);
+                    const users = await res.json();
+
+                    if (users.length === 0) {
+                        alert('该手机号未注册，请先注册');
+                        return;
+                    }
+
+                    // 存储完整用户信息，包括userName
+                    localStorage.setItem('loggedInUser', JSON.stringify(users[0]));
+                    window.location.href = '../index.html';
+                } catch (error) {
+                    alert('登录失败：' + error.message);
+                }
+            },
+            async pwdLogin() {
+                const phone = this.pwdLoginPhone.trim();
+                const password = this.loginPassword.trim();
+
+                if (!phone || phone.length !== 11) {
+                    alert('请输入有效的手机号');
+                    return;
+                }
+
+                if (!password) {
+                    alert('请输入密码');
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`http://localhost:3000/users?phone=${phone}&password=${password}`);
+                    const users = await res.json();
+
+                    if (users.length === 0) {
+                        alert('手机号或密码错误');
+                        return;
+                    }
+
+                    // 存储完整用户信息，包括userName
+                    localStorage.setItem('loggedInUser', JSON.stringify(users[0]));
+                    window.location.href = '../index.html';
+                } catch (error) {
+                    alert('登录失败：' + error.message);
+                }
+            }
+        }
+    }).mount('#app');
 </script>
 </body>
 

@@ -13,44 +13,121 @@
     <link rel="stylesheet" type="text/css" href="../styles/adderss.css" />
     <link rel="stylesheet" type="text/css" href="../styles/common.css" />
     <script type="text/javascript" src="../js/common.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../js/zepto.min.js"></script>
 </head>
 
 <body>
-    <div class="wrap">
-
-        <!-- 头部 start -->
-        <header class="header_bar">
-            <a href="address.html">
-                <div class="header_bar_back"></div>
-            </a>
-            <div class="header_bar_title">新建收货地址</div>
-        </header>
-        <!-- 头部 end -->
-        <div class="container">
-            <div class="form">
-                <div class="form_item">
-                    <p>所在省份:</p>
-                    <input type="text" placeholder="请输入省份" />
-                </div>
-                <div class="form_item">
-                    <p>具体地址:</p>
-                    <input type="text" placeholder="请输入具体地址" />
-                </div>
-                <div class="form_item">
-                    <p>联系姓名:</p>
-                    <input type="text" placeholder="请输入联系人姓名" />
-                </div>
-                <div class="form_item">
-                    <p>联系电话:</p>
-                    <input type="text" placeholder="请输入联系人电话" />
-                </div>
+<div class="wrap" id="app">
+    <!-- 头部 start -->
+    <header class="header_bar">
+        <a href="address.html">
+            <div class="header_bar_back"></div>
+        </a>
+        <div class="header_bar_title">新建收货地址</div>
+    </header>
+    <!-- 头部 end -->
+    <div class="container">
+        <div class="form">
+            <div class="form_item">
+                <p>所在省份:</p>
+                <input type="text" v-model="address.province" placeholder="请输入省份" />
+            </div>
+            <div class="form_item">
+                <p>具体地址:</p>
+                <input type="text" v-model="address.detail" placeholder="请输入具体地址" />
+            </div>
+            <div class="form_item">
+                <p>联系姓名:</p>
+                <input type="text" v-model="address.contactName" placeholder="请输入联系人姓名" />
+            </div>
+            <div class="form_item">
+                <p>联系电话:</p>
+                <input type="text" v-model="address.phone" placeholder="请输入联系人电话" />
             </div>
         </div>
-        <div class="">
-            <button class="account" onclick="location.href='address.html'">保存收货地址</button>
-        </div>
     </div>
+    <div class="">
+        <button class="account" @click="saveAddress">保存收货地址</button>
+    </div>
+</div>
 
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                address: {
+                    province: '',
+                    detail: '',
+                    contactName: '',
+                    phone: ''
+                },
+                userId: null
+            }
+        },
+        mounted() {
+            // 获取当前登录用户信息
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                try {
+                    const user = JSON.parse(loggedInUser);
+                    this.userId = user.id;
+                } catch (e) {
+                    console.error('解析用户信息失败', e);
+                    alert('请先登录');
+                    window.location.href = 'login.html';
+                }
+            } else {
+                alert('请先登录');
+                window.location.href = 'login.html';
+            }
+        },
+        methods: {
+            async saveAddress() {
+                // 简单验证
+                if (!this.address.province || !this.address.detail || !this.address.contactName || !this.address.phone) {
+                    alert('请填写完整信息');
+                    return;
+                }
+
+                try {
+                    // 获取当前用户信息
+                    const response = await fetch(`http://localhost:3000/users/${this.userId}`);
+                    const user = await response.json();
+
+                    // 初始化地址数组（如果不存在）
+                    if (!user.addresses) {
+                        user.addresses = [];
+                    }
+
+                    // 添加新地址
+                    const newAddress = {
+                        id: Date.now().toString(), // 简单生成唯一ID
+                        ...this.address
+                    };
+                    user.addresses.push(newAddress);
+
+                    // 更新用户信息
+                    await fetch(`http://localhost:3000/users/${this.userId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    });
+
+                    // 保存成功后返回地址列表页
+                    window.location.href = 'address.html';
+                } catch (error) {
+                    console.error('保存地址失败', error);
+                    alert('保存失败，请重试');
+                }
+            }
+        }
+    }).mount('#app');
+</script>
 </body>
 
 </html>
