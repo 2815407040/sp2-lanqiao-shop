@@ -17,399 +17,422 @@
 </head>
 
 <body>
-    <div class="wrap">
-        <!-- 头部 start -->
-        <header class="header_bar">
-            <a href="../index.html">
-                <div class="header_bar_back"></div>
-            </a>
-            <div class="header_bar_title">商家主页</div>
-        </header>
-        <!-- 头部 end -->
-        <!-- 商家主页-头部 start -->
-        <div class="shop_info">
-            <div class="logo">
-                <img src="../images/shop/yh.jpg" alt="">
-            </div>
-            <div class="title">
-                <h2>
-                    <span>永辉超市-搜秀城店</span>
-                    <i class="iconfont icon-yousanjiao"></i>
-                </h2>
-                <div class="discount">
-                    <div>
-                        <span class="special">满减</span>
-                        <span class="dis_active">满99减98，满199减198</span>
-                    </div>
-                </div>
-            </div>
+<div class="wrap">
+    <!-- 头部 start -->
+    <header class="header_bar">
+        <a href="../index.html">
+            <div class="header_bar_back"></div>
+        </a>
+        <div class="header_bar_title">商家主页</div>
+    </header>
+    <!-- 头部 end -->
+    <!-- 商家主页-头部 start -->
+    <div class="shop_info">
+        <div class="logo">
+            <img src="../images/shop/yh.jpg" alt="">
         </div>
-        <!-- 商家主页-头部 end -->
-        <div class="container">
-            <!-- 商品列表 start -->
-            <div class="goods">
-                <div class="left">
-                    <ul>
-                        <li class="cur">
-                            <span><a href="#A">限量秒杀</a></span>
-                        </li>
-                        <li>
-                            <span><a href="#B">品牌直降</a></span>
-                        </li>
-                        <li>
-                            <span><a href="#C">情满中秋</a></span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="right" onscroll="toscroll()">
-                    <ul>
-                        <li id="A">
-                            <h1 class="goodTitle">限量秒杀</h1>
-                            <dl>
-                                <dd class="good_item">
-                                    <img src="../images/goods/qx.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">千禧西红柿(500g)</p>
-                                        <p class="desc">饭后解腻佳品</p>
-                                        <p class="sale">
-                                            <span>月售176</span>
-                                            <span>好评率96%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 6.9
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num1','reduce')"></span>
-                                                <span class="num" id="num1">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num1','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/gm.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">龙须挂面1kg</p>
-                                        <p class="desc">居家必备</p>
-                                        <p class="sale">
-                                            <span>月售100</span>
-                                            <span>好评率98%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 7.9
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num2','reduce')"></span>
-                                                <span class="num" id="num2">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num2','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/snh.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">收纳盒(喜得龙)</p>
-                                        <p class="desc">空间最大化利用</p>
-                                        <p class="sale">
-                                            <span>月售16</span>
-                                            <span>好评率90%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 16.9
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num3','reduce')"></span>
-                                                <span class="num" id="num3">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num3','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/sj.jpeg" alt="">
-                                    <section class="info">
-                                        <p class="name">消毒湿巾</p>
-                                        <p class="desc">75度酒精杀菌</p>
-                                        <p class="sale">
-                                            <span>月售476</span>
-                                            <span>好评率99%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 4.9
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num4','reduce')"></span>
-                                                <span class="num" id="num4">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num4','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-
-                            </dl>
-                        </li>
-                        <li id="B">
-                            <h1 class="goodTitle">品牌直降</h1>
-                            <dl>
-                                <dd class="good_item">
-                                    <img src="../images/goods/jd.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">鸡蛋9枚</p>
-                                        <p class="desc">产地直采，性价比高</p>
-                                        <p class="sale">
-                                            <span>月售176</span>
-                                            <span>好评率96%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 6.5
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num5','reduce')"></span>
-                                                <span class="num" id="num5">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num5','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/by.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">鲍鱼约30g</p>
-                                        <p class="desc">鲜活到家</p>
-                                        <p class="sale">
-                                            <span>月售165</span>
-                                            <span>好评率96%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 3.9
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num6','reduce')"></span>
-                                                <span class="num" id="num6">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num6','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/kl.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">可口可乐(2L)</p>
-                                        <p class="desc">无糖零度</p>
-                                        <p class="sale">
-                                            <span>月售1769</span>
-                                            <span>好评率100%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 6.5
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num7','reduce')"></span>
-                                                <span class="num" id="num7">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num7','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/qc.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">芹菜(500g)</p>
-                                        <p class="desc">新鲜到家</p>
-                                        <p class="sale">
-                                            <span>月售100</span>
-                                            <span>好评率96%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 6.9
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num8','reduce')"></span>
-                                                <span class="num" id="num8">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num8','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-
-                            </dl>
-                        </li>
-                        <li id="C">
-                            <h1 class="goodTitle">情满中秋</h1>
-                            <dl>
-                                <dd class="good_item">
-                                    <img src="../images/goods/dzx.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">阳澄湖大闸蟹(538型)</p>
-                                        <p class="desc">3.0公蟹 2.0母蟹</p>
-                                        <p class="sale">
-                                            <span>月售1176</span>
-                                            <span>好评率88%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 666
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num9','reduce')"></span>
-                                                <span class="num" id="num9">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num9','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/dzx.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">阳澄湖大闸蟹(313型)</p>
-                                        <p class="desc">4.0公蟹 4.0母蟹</p>
-                                        <p class="sale">
-                                            <span>月售176</span>
-                                            <span>好评率68%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 999
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num10','reduce')"></span>
-                                                <span class="num" id="num10">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num10','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/dzx.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">阳澄湖大闸蟹(888型)</p>
-                                        <p class="desc">3.5公蟹 2.5母蟹</p>
-                                        <p class="sale">
-                                            <span>月售111</span>
-                                            <span>好评率98%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 708
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num11','reduce')"></span>
-                                                <span class="num" id="num11">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num11','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/dzx.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">阳澄湖大闸蟹(1188型)</p>
-                                        <p class="desc">4.5公蟹 4.0母蟹</p>
-                                        <p class="sale">
-                                            <span>月售76</span>
-                                            <span>好评率88%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 948
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num12','reduce')"></span>
-                                                <span class="num" id="num12">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num12','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/dxc.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">稻香村月饼礼盒(A型)</p>
-                                        <p class="desc">4蛋黄 2莲蓉 3枣泥</p>
-                                        <p class="sale">
-                                            <span>月售76</span>
-                                            <span>好评率88%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 108
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num13','reduce')"></span>
-                                                <span class="num" id="num13">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num13','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                                <dd class="good_item">
-                                    <img src="../images/goods/dxc.jpg" alt="">
-                                    <section class="info">
-                                        <p class="name">稻香村月饼礼盒(B型)</p>
-                                        <p class="desc">3蛋黄 1莲蓉 4枣泥</p>
-                                        <p class="sale">
-                                            <span>月售72</span>
-                                            <span>好评率88%</span>
-                                        </p>
-                                        <div class="more">
-                                            <div class="price">
-                                                <span>￥</span> 98
-                                            </div>
-                                            <div class="action">
-                                                <span class="iconfont icon-jian" onclick="changenum('num14','reduce')"></span>
-                                                <span class="num" id="num14">1</span>
-                                                <span class="iconfont icon-jia" onclick="changenum('num14','add')"></span>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </dd>
-                            </dl>
-                        </li>
-
-
-                    </ul>
+        <div class="title">
+            <h2>
+                <span>永辉超市-搜秀城店</span>
+                <i class="iconfont icon-yousanjiao"></i>
+            </h2>
+            <div class="discount">
+                <div>
+                    <span class="special">满减</span>
+                    <span class="dis_active">满99减98，满199减198</span>
                 </div>
             </div>
-            <!-- 商品列表 end -->
         </div>
     </div>
-    <!--去结算 start-->
-    <div class="cart">
-        <div class="cart_info">
-            <div class="carlogo">
-                <span class="iconfont icon-gouwuche">   <i class="count">1</i></span>
+    <!-- 商家主页-头部 end -->
+    <div class="container">
+        <!-- 商品列表 start -->
+        <div class="goods">
+            <div class="left">
+                <ul>
+                    <li class="cur">
+                        <span><a href="#A">限量秒杀</a></span>
+                    </li>
+                    <li>
+                        <span><a href="#B">品牌直降</a></span>
+                    </li>
+                    <li>
+                        <span><a href="#C">情满中秋</a></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right" onscroll="toscroll()">
+                <ul>
+                    <li id="A">
+                        <h1 class="goodTitle">限量秒杀</h1>
+                        <dl>
+                            <dd class="good_item" data-price="6.9" data-id="goods1" data-name="千禧西红柿(500g)">
+                                <img src="../images/goods/qx.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">千禧西红柿(500g)</p>
+                                    <p class="desc">饭后解腻佳品</p>
+                                    <p class="sale">
+                                        <span>月售176</span>
+                                        <span>好评率96%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 6.9
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num1','reduce')"></span>
+                                            <span class="num" id="num1">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num1','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="7.9" data-id="goods2" data-name="龙须挂面1kg">
+                                <img src="../images/goods/gm.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">龙须挂面1kg</p>
+                                    <p class="desc">居家必备</p>
+                                    <p class="sale">
+                                        <span>月售100</span>
+                                        <span>好评率98%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 7.9
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num2','reduce')"></span>
+                                            <span class="num" id="num2">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num2','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="16.9" data-id="goods3" data-name="收纳盒(喜得龙)">
+                                <img src="../images/goods/snh.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">收纳盒(喜得龙)</p>
+                                    <p class="desc">空间最大化利用</p>
+                                    <p class="sale">
+                                        <span>月售16</span>
+                                        <span>好评率90%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 16.9
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num3','reduce')"></span>
+                                            <span class="num" id="num3">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num3','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="4.9" data-id="goods4" data-name="消毒湿巾">
+                                <img src="../images/goods/sj.jpeg" alt="">
+                                <section class="info">
+                                    <p class="name">消毒湿巾</p>
+                                    <p class="desc">75度酒精杀菌</p>
+                                    <p class="sale">
+                                        <span>月售476</span>
+                                        <span>好评率99%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 4.9
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num4','reduce')"></span>
+                                            <span class="num" id="num4">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num4','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
 
+                        </dl>
+                    </li>
+                    <li id="B">
+                        <h1 class="goodTitle">品牌直降</h1>
+                        <dl>
+                            <dd class="good_item" data-price="6.5" data-id="goods5" data-name="鸡蛋9枚">
+                                <img src="../images/goods/jd.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">鸡蛋9枚</p>
+                                    <p class="desc">产地直采，性价比高</p>
+                                    <p class="sale">
+                                        <span>月售176</span>
+                                        <span>好评率96%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 6.5
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num5','reduce')"></span>
+                                            <span class="num" id="num5">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num5','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="3.9" data-id="goods6" data-name="鲍鱼约30g">
+                                <img src="../images/goods/by.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">鲍鱼约30g</p>
+                                    <p class="desc">鲜活到家</p>
+                                    <p class="sale">
+                                        <span>月售165</span>
+                                        <span>好评率96%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 3.9
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num6','reduce')"></span>
+                                            <span class="num" id="num6">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num6','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="6.5" data-id="goods7" data-name="可口可乐(2L)">
+                                <img src="../images/goods/kl.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">可口可乐(2L)</p>
+                                    <p class="desc">无糖零度</p>
+                                    <p class="sale">
+                                        <span>月售1769</span>
+                                        <span>好评率100%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 6.5
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num7','reduce')"></span>
+                                            <span class="num" id="num7">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num7','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="6.9" data-id="goods8" data-name="芹菜(500g)">
+                                <img src="../images/goods/qc.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">芹菜(500g)</p>
+                                    <p class="desc">新鲜到家</p>
+                                    <p class="sale">
+                                        <span>月售100</span>
+                                        <span>好评率96%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 6.9
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num8','reduce')"></span>
+                                            <span class="num" id="num8">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num8','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+
+                        </dl>
+                    </li>
+                    <li id="C">
+                        <h1 class="goodTitle">情满中秋</h1>
+                        <dl>
+                            <dd class="good_item" data-price="666" data-id="goods9" data-name="阳澄湖大闸蟹(538型)">
+                                <img src="../images/goods/dzx.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">阳澄湖大闸蟹(538型)</p>
+                                    <p class="desc">3.0公蟹 2.0母蟹</p>
+                                    <p class="sale">
+                                        <span>月售1176</span>
+                                        <span>好评率88%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 666
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num9','reduce')"></span>
+                                            <span class="num" id="num9">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num9','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="999" data-id="goods10" data-name="阳澄湖大闸蟹(313型)">
+                                <img src="../images/goods/dzx.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">阳澄湖大闸蟹(313型)</p>
+                                    <p class="desc">4.0公蟹 4.0母蟹</p>
+                                    <p class="sale">
+                                        <span>月售176</span>
+                                        <span>好评率68%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 999
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num10','reduce')"></span>
+                                            <span class="num" id="num10">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num10','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="708" data-id="goods11" data-name="阳澄湖大闸蟹(888型)">
+                                <img src="../images/goods/dzx.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">阳澄湖大闸蟹(888型)</p>
+                                    <p class="desc">3.5公蟹 2.5母蟹</p>
+                                    <p class="sale">
+                                        <span>月售111</span>
+                                        <span>好评率98%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 708
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num11','reduce')"></span>
+                                            <span class="num" id="num11">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num11','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="948" data-id="goods12" data-name="阳澄湖大闸蟹(1188型)">
+                                <img src="../images/goods/dzx.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">阳澄湖大闸蟹(1188型)</p>
+                                    <p class="desc">4.5公蟹 4.0母蟹</p>
+                                    <p class="sale">
+                                        <span>月售76</span>
+                                        <span>好评率88%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 948
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num12','reduce')"></span>
+                                            <span class="num" id="num12">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num12','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="108" data-id="goods13" data-name="稻香村月饼礼盒(A型)">
+                                <img src="../images/goods/dxc.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">稻香村月饼礼盒(A型)</p>
+                                    <p class="desc">4蛋黄 2莲蓉 3枣泥</p>
+                                    <p class="sale">
+                                        <span>月售76</span>
+                                        <span>好评率88%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 108
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num13','reduce')"></span>
+                                            <span class="num" id="num13">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num13','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                            <dd class="good_item" data-price="98" data-id="goods14" data-name="稻香村月饼礼盒(B型)">
+                                <img src="../images/goods/dxc.jpg" alt="">
+                                <section class="info">
+                                    <p class="name">稻香村月饼礼盒(B型)</p>
+                                    <p class="desc">3蛋黄 1莲蓉 4枣泥</p>
+                                    <p class="sale">
+                                        <span>月售72</span>
+                                        <span>好评率88%</span>
+                                    </p>
+                                    <div class="more">
+                                        <div class="price">
+                                            <span>￥</span> 98
+                                        </div>
+                                        <div class="action">
+                                            <span class="iconfont icon-jian" onclick="changenum('num14','reduce')"></span>
+                                            <span class="num" id="num14">0</span>
+                                            <span class="iconfont icon-jia" onclick="changenum('num14','add')"></span>
+                                        </div>
+                                    </div>
+                                </section>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
             </div>
-            <div class="price">
-                <div class="noShop">
-                    <p style="color: #fff;font-size: 0.3rem;">总计：101 元</p>
-                </div>
-            </div>
-            <div class="account" onclick="location.href='/pages/order-confirm.html'">去结算</div>
         </div>
-        <!--去结算 end-->
+        <!-- 商品列表 end -->
+    </div>
+</div>
+<!--去结算 start-->
+<div class="cart">
+    <div class="cart_info">
+        <div class="carlogo">
+            <span class="iconfont icon-gouwuche">   <i class="count">0</i></span>
+        </div>
+        <div class="price">
+            <div class="noShop">
+                <p style="color: #fff;font-size: 0.3rem;">总计：0 元</p>
+            </div>
+        </div>
+        <div class="account" onclick="submitOrder()">去结算</div>
+    </div>
+</div>
+    <!--去结算 end-->
 </body>
 
 <script>
-    //数量加减
+    // 数量加减并更新总价
     function changenum(numid, action) {
         let numitem = $('#' + numid);
+        let currentNum = parseInt(numitem.text());
+
         if (action == 'reduce') {
-            numitem.text(parseInt(numitem.text()) == 0 ? 0 : (parseInt(numitem.text())) - 1);
+            numitem.text(currentNum <= 0 ? 0 : currentNum - 1);
         } else {
-            numitem.text((parseInt(numitem.text())) + 1);
+            numitem.text(currentNum + 1);
         }
+
+        updateTotal();
     }
-    //右侧滑动
+
+    // 更新总价和购物车数量
+    function updateTotal() {
+        let total = 0;
+        let totalCount = 0;
+
+        // 遍历所有商品计算总价和总数量
+        $('.good_item').each(function(index, item) {
+            let numId = 'num' + (index + 1);
+            let num = parseInt($('#' + numId).text());
+            let price = parseFloat($(item).data('price'));
+
+            total += num * price;
+            totalCount += num;
+        });
+
+        // 更新页面显示
+        $('.price p').text('总计：' + total.toFixed(2) + ' 元');
+        $('.count').text(totalCount);
+    }
+
+    // 右侧滑动
     function toscroll() {
         var titles = $('.goodTitle');
         for (var i = 0; i < titles.length; i++) {
@@ -418,6 +441,89 @@
                 $($(".left ul li")[i]).addClass('cur').siblings().removeClass('cur');
             }
         }
+    }
+
+    // 生成订单号（基于当前时间）
+    function generateOrderNo() {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
+
+        return `${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`;
+    }
+
+    // 提交订单
+    function submitOrder() {
+        // 收集选中的商品
+        const selectedGoods = [];
+        $('.good_item').each(function(index, item) {
+            let numId = 'num' + (index + 1);
+            let num = parseInt($('#' + numId).text());
+
+            if (num > 0) {
+                selectedGoods.push({
+                    id: $(item).data('id'),
+                    name: $(item).data('name'),
+                    price: $(item).data('price'),
+                    quantity: num,
+                    total: $(item).data('price') * num
+                });
+            }
+        });
+
+        if (selectedGoods.length === 0) {
+            alert('请选择商品');
+            return;
+        }
+
+        // 生成订单信息
+        const orderNo = generateOrderNo();
+        const orderTime = new Date().toLocaleString();
+        const totalAmount = selectedGoods.reduce((sum, item) => sum + item.total, 0);
+
+        const order = {
+            id: orderNo,
+            orderNo: orderNo,
+            createTime: orderTime,
+            shopId: '8f1c', // 永辉超市-搜秀城店的ID
+            shopName: '永辉超市-搜秀城店',
+            goods: selectedGoods,
+            totalAmount: totalAmount,
+            status: 'pending', // 订单状态：待支付
+            userId: '8841' // 默认使用第一个用户ID
+        };
+
+        // 保存订单到db.json（实际项目中需要后端API支持）
+        saveOrderToDb(order);
+
+        // 跳转到订单确认页
+        location.href='/pages/order-confirm.html';
+    }
+
+    // 保存订单到db.json（前端模拟，实际需后端处理）
+    function saveOrderToDb(order) {
+        // 这里使用localStorage模拟保存
+        let dbData = JSON.parse(localStorage.getItem('dbData') || '{"shop_list":[],"users":[],"orders":[]}');
+
+        // 如果是首次保存，从服务器加载初始数据
+        if (dbData.shop_list.length === 0) {
+            // 实际项目中这里应该是AJAX请求
+            console.log('从服务器加载初始数据');
+        }
+
+        // 添加新订单
+        dbData.orders = dbData.orders || [];
+        dbData.orders.push(order);
+
+        // 保存回localStorage
+        localStorage.setItem('dbData', JSON.stringify(dbData));
+        console.log('订单已保存:', order);
+        alert('订单提交成功，订单号：' + order.orderNo);
     }
 </script>
 
