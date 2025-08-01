@@ -13,63 +13,104 @@
     <link rel="stylesheet" type="text/css" href="../styles/user.css" />
     <link rel="stylesheet" type="text/css" href="../styles/common.css" />
     <script type="text/javascript" src="../js/common.js"></script>
+    <script src="../js/zepto.min.js"></script>
+    <!-- 引入Vue3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="container">
-            <!--头部 start-->
-            <header class="user">
-                <div class="userinfo">
-                    <a href="#" class="avatar"><img src="../images/user/avatar.jpg"></a>
-                    <span class="nickname"><span>LUXI</span></span>
-                </div>
-            </header>
-            <!--头部 end-->
-            <!--导航链接 start-->
-            <section>
-                <div class="link_item">
-                    <a href="follow.html"> <span class="name">我的关注</span>
-                    </a>
-                    <span class="iconfont icon-youjiantou"></span>
-                </div>
-                <div class="link_item">
-                    <a href="address.html"> <span class="name">我的地址</span></a> <span class="iconfont icon-youjiantou"></span>
-                </div>
-                <div class="link_item">
-                    <a href="login.html">退出账号</a><span class="iconfont icon-youjiantou"></span>
-                </div>
-            </section>
-            <!--导航链接 end-->
-        </div>
-        <!-- 底部 start -->
-        <footer class="footer">
-            <ul>
-                <li>
-                    <a href="../index.html">
-                        <span class="iconfont icon-shouye"></span> 首页
-                    </a>
-                </li>
-                <li>
-                    <a href="shopcart.html">
-                        <span class="iconfont icon-gouwuche"></span> 购物车
-                    </a>
-                </li>
-                <li>
-                    <a href="order.html">
-                        <span class="iconfont icon-dingdan"></span> 订单
-                    </a>
-                </li>
-                <li>
-                    <a href="user.html" class="tabcur">
-                        <span class="iconfont icon-wode"></span> 我的
-                    </a>
-                </li>
-            </ul>
-        </footer>
-        <!-- 底部 end -->
+<div class="wrap">
+    <div class="container" id="app">
+        <!--头部 start-->
+        <header class="user">
+            <div class="userinfo">
+                <a href="#" class="avatar"><img src="../images/user/avatar.jpg"></a>
+                <span class="nickname" id="userNameDisplay">
+                    <span>{{ userName }}</span>
+                </span>
+            </div>
+        </header>
+        <!--头部 end-->
+        <!--导航链接 start-->
+        <section>
+            <div class="link_item">
+                <a href="follow.html"> <span class="name">我的关注</span>
+                </a>
+                <span class="iconfont icon-youjiantou"></span>
+            </div>
+            <div class="link_item">
+                <a href="address.html"> <span class="name">我的地址</span></a> <span class="iconfont icon-youjiantou"></span>
+            </div>
+            <!-- 退出登录选项 - 保持原有DOM结构和样式 -->
+            <div class="link_item" id="logoutBtn" v-if="isLoggedIn">
+                <a href="javascript:;" @click="logout">退出账号</a><span class="iconfont icon-youjiantou"></span>
+            </div>
+            <div class="link_item" id="loginBtn" v-else>
+                <a href="login.html">去登录</a><span class="iconfont icon-youjiantou"></span>
+            </div>
+        </section>
+        <!--导航链接 end-->
     </div>
+    <!-- 底部 start -->
+    <footer class="footer">
+        <ul>
+            <li>
+                <a href="../index.html">
+                    <span class="iconfont icon-shouye"></span> 首页
+                </a>
+            </li>
+            <li>
+                <a href="shopcart.html">
+                    <span class="iconfont icon-gouwuche"></span> 购物车
+                </a>
+            </li>
+            <li>
+                <a href="order.html">
+                    <span class="iconfont icon-dingdan"></span> 订单
+                </a>
+            </li>
+            <li>
+                <a href="user.html" class="tabcur">
+                    <span class="iconfont icon-wode"></span> 我的
+                </a>
+            </li>
+        </ul>
+    </footer>
+    <!-- 底部 end -->
+</div>
 
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                userName: '请登录',
+                isLoggedIn: false
+            }
+        },
+        mounted() {
+            // 从localStorage获取完整用户信息（与login.html保持一致）
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                try {
+                    const user = JSON.parse(loggedInUser);
+                    // 优先显示userName，兼容旧数据中的userStr
+                    this.userName = user.userName || user.userStr || '用户';
+                    this.isLoggedIn = true;
+                } catch (e) {
+                    console.error('解析用户信息失败', e);
+                }
+            }
+        },
+        methods: {
+            logout() {
+                localStorage.removeItem('loggedInUser');
+                window.location.href = 'login.html';
+            }
+        }
+    }).mount('#app');
+</script>
 </body>
 
 </html>

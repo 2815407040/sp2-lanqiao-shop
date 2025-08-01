@@ -12,130 +12,173 @@
     <link rel="stylesheet" type="text/css" href="../styles/iconfont/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="../styles/common.css" />
     <script type="text/javascript" src="../js/common.js"></script>
+    <!-- 引入Vue3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="container">
-            <!-- 头部 start -->
-            <header class="header_bar">
-                <a href="user.html">
-                    <div class="header_bar_back"></div>
-                </a>
-                <div class="header_bar_title">我的关注</div>
-            </header>
-            <!-- 头部 end -->
-            <!-- 附近商家列表 start -->
-            <div class="shop" style="margin-top: 1.3rem;">
-
-                <div class="shop_list">
-                    <ul>
-                        <li>
-                            <a href="shop.html">
-                                <div class="shop_info">
-                                    <img src="../images/shop/xc.png" class="shop_img">
-                                    <div class="shop_main">
-                                        <div class="main_top">
-                                            <h3>喜茶-东方广场店</h3>
+<div class="wrap">
+    <div class="container" id="app">
+        <!-- 头部 start -->
+        <header class="header_bar">
+            <a href="user.html">
+                <div class="header_bar_back"></div>
+            </a>
+            <div class="header_bar_title">我的关注</div>
+        </header>
+        <!-- 头部 end -->
+        <!-- 关注商家列表 start -->
+        <div class="shop" style="margin-top: 1.3rem;">
+            <div class="shop_list" v-if="followedShops.length > 0">
+                <ul>
+                    <li v-for="shop in followedShops" :key="shop.id">
+                        <a href="shop.html">
+                            <div class="shop_info">
+                                <img :src="'../' + shop.img" class="shop_img">
+                                <div class="shop_main">
+                                    <div class="main_top">
+                                        <h3>{{ shop.name }}</h3>
+                                    </div>
+                                    <div class="main_more">
+                                        <div class="main_desc">
+                                            <img src="../images/shop/star.png" alt="">
+                                            <span class="sale">{{ shop.sales }}</span>
                                         </div>
-                                        <div class="main_more">
-                                            <div class="main_desc">
-                                                <img src="../images/shop/star.png" alt="">
-                                                <span class="sale">月销2000+</span>
-                                            </div>
-                                            <div class="money_limit">
-                                                <span>￥20起送 | 配送费￥6</span>
-                                                <span>1km | 20分钟</span>
-                                            </div>
-
-                                            <div class="main_price">
-                                                <span class="act_icon">特</span>
-                                                <span class="act_desc">芒果芝芝 19元起</span>
-                                            </div>
-                                            <div class="main_price">
-                                                <span class="act_icon">减</span>
-                                                <span class="act_desc">满120减59</span>
-                                            </div>
+                                        <div class="money_limit">
+                                            <span>{{ shop.deliveryInfo.minOrderAmount }}起送</span>
+                                            <span>配送费{{ shop.deliveryInfo.deliveryFee }}</span>
+                                        </div>
+                                        <div class="main_time">
+                                            <span>{{ shop.deliveryInfo.distance }}</span>
+                                            <span>{{ shop.deliveryInfo.time }}</span>
+                                        </div>
+                                        <div class="main_price" v-for="activity in shop.activities" :key="activity.type + activity.desc">
+                                            <span class="act_icon">{{ activity.type }}</span>
+                                            <span class="act_desc">{{ activity.desc }}</span>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/pages/shop.html">
-                                <div class="shop_info">
-                                    <img src="../images/shop/mdl.jpg" class="shop_img">
-                                    <div class="shop_main">
-                                        <div class="main_top">
-                                            <h3>麦当劳-王府井店</h3>
-                                        </div>
-                                        <div class="main_more">
-                                            <div class="main_desc">
-                                                <img src="../images/shop/star.png" alt="">
-                                                <span class="sale">月销1000+</span>
-                                            </div>
-                                            <div class="money_limit">
-                                                <span>￥20起送</span>
-                                                <span>配送费￥9</span>
-                                            </div>
-                                            <div class="main_time">
-                                                <span>203m</span>
-                                                <span>15分钟</span>
-                                            </div>
-                                            <div class="main_price">
-                                                <span class="act_icon">特</span>
-                                                <span class="act_desc">特价商品2元起</span>
-                                            </div>
-                                            <div class="main_price">
-                                                <span class="act_icon">减</span>
-                                                <span class="act_desc">满100减50</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="shop.html">
-                                <div class="shop_info">
-                                    <img src="../images/shop/xjd.jpg" class="shop_img">
-                                    <div class="shop_main">
-                                        <div class="main_top">
-                                            <h3>喜家德-东方广场店</h3>
-                                        </div>
-                                        <div class="main_more">
-                                            <div class="main_desc">
-                                                <img src="../images/shop/star.png" alt="">
-                                                <span class="sale">月销100+</span>
-                                            </div>
-                                            <div class="money_limit">
-                                                <span>￥49起送</span>
-                                                <span>配送费￥6</span>
-                                            </div>
-                                            <div class="main_time">
-                                                <span>100m</span>
-                                                <span>10分钟</span>
-                                            </div>
-                                            <div class="main_price">
-                                                <span class="act_icon">特</span>
-                                                <span class="act_desc">特价商品29元起</span>
-                                            </div>
-                                            <div class="main_price">
-                                                <span class="act_icon">减</span>
-                                                <span class="act_desc">满100减69</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                            </div>
+                        </a>
+                        <!-- 关注按钮 -->
+                        <button class="follow-btn followed" @click.stop="toggleFollow(shop)">
+                            已关注
+                        </button>
+                    </li>
+                </ul>
             </div>
-            <!-- 附近商家 end -->
+            <!-- 无关注商家时显示 -->
+            <div class="no-follow" v-else>
+                <p>您还没有关注任何商家</p>
+            </div>
         </div>
+        <!-- 关注商家 end -->
     </div>
+</div>
 
+<style>
+    /* 关注按钮样式 */
+    .follow-btn {
+        margin: 0.5rem 1rem;
+        padding: 0.3rem 1rem;
+        border: 1px solid #ff4444;
+        border-radius: 0.5rem;
+        background: transparent;
+        color: #ff4444;
+        cursor: pointer;
+    }
+    .follow-btn.followed {
+        background: #ff4444;
+        color: white;
+    }
+    /* 无关注时样式 */
+    .no-follow {
+        text-align: center;
+        padding: 2rem;
+        color: #999;
+    }
+</style>
+
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                followedShops: [],
+                userId: null,
+                allShops: []
+            }
+        },
+        mounted() {
+            // 检查登录状态
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (!loggedInUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            this.userId = JSON.parse(loggedInUser).id;
+            this.fetchAllShops();
+        },
+        methods: {
+            async fetchAllShops() {
+                try {
+                    const response = await fetch('http://localhost:3000/shop_list');
+                    if (!response.ok) throw new Error('获取商家列表失败');
+                    this.allShops = await response.json();
+                    this.fetchFollowedShops();
+                } catch (error) {
+                    console.error('获取商家数据失败:', error);
+                }
+            },
+
+            async fetchFollowedShops() {
+                try {
+                    const response = await fetch(`http://localhost:3000/users/${this.userId}`);
+                    if (!response.ok) throw new Error('获取用户关注列表失败');
+                    const user = await response.json();
+                    const followedIds = user.follows || [];
+
+                    // 筛选出关注的商家
+                    this.followedShops = this.allShops.filter(shop =>
+                        followedIds.includes(shop.id)
+                    );
+                } catch (error) {
+                    console.error('获取关注商家失败:', error);
+                }
+            },
+
+            async toggleFollow(shop) {
+                try {
+                    // 获取用户当前关注列表
+                    const userResponse = await fetch(`http://localhost:3000/users/${this.userId}`);
+                    if (!userResponse.ok) throw new Error('获取用户信息失败');
+                    const user = await userResponse.json();
+
+                    // 移除关注
+                    user.follows = (user.follows || []).filter(id => id !== shop.id);
+
+                    // 保存更新
+                    const updateResponse = await fetch(`http://localhost:3000/users/${this.userId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ follows: user.follows })
+                    });
+
+                    if (!updateResponse.ok) throw new Error('取消关注失败');
+
+                    // 更新本地列表
+                    this.followedShops = this.followedShops.filter(s => s.id !== shop.id);
+                } catch (error) {
+                    console.error('取消关注失败:', error);
+                }
+            }
+        }
+    }).mount('#app');
+</script>
 </body>
 
 </html>

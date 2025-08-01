@@ -12,12 +12,12 @@
     <link rel="stylesheet" type="text/css" href="../styles/login.css">
     <link rel="stylesheet" type="text/css" href="../styles/common.css" />
     <script src="../js/common.js"></script>
-    <!-- 确保引入Zepto -->
-    <script src="../js/zepto.min.js"></script>
+    <!-- 引入Vue3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
-<div class="wrap">
+<div id="app" class="wrap">
     <div class="container">
         <!-- logo start-->
         <div class="header_logo">
@@ -26,25 +26,30 @@
         <!-- logo end -->
         <!-- 注册 start-->
         <div class="login_item">
+            <span class="login_text">用户名</span>
+            <input class="login_input" v-model="userName" id="userName" type="text" maxlength="20" placeholder="请输入用户名" />
+        </div>
+        <div class="login_item">
             <span class="login_text">手机号</span>
-            <input class="login_input" id="phone" type="tel" maxlength="11" placeholder="输入手机号" />
+            <input class="login_input" v-model="phone" id="phone" type="tel" maxlength="11" placeholder="输入手机号" />
         </div>
         <div class="login_item">
             <span class="login_text">验证码</span>
             <div class="auth_div">
-                <!-- 验证码改为6位 -->
-                <input class="login_input" id="code" type="text" maxlength="6" placeholder="输入验证码" />
+                <input class="login_input" v-model="code" id="code" type="text" maxlength="6" placeholder="输入验证码" />
                 <div class="code">
-                    <span id="getCode">获取验证码</span>
+                    <span id="getCode" @click="getVerificationCode" :disabled="isCodeDisabled" :style="{ opacity: isCodeDisabled ? 0.6 : 1 }">
+                        {{ codeText }}
+                    </span>
                 </div>
             </div>
         </div>
         <div class="login_item">
             <span class="login_text">密码</span>
-            <input class="login_input" id="password" type="password" maxlength="16" placeholder="设置您的登录密码（6-16位）" />
+            <input class="login_input" v-model="password" id="password" type="password" maxlength="16" placeholder="设置您的登录密码（6-16位）" />
         </div>
         <div class="login_button">
-            <a href="javascript:;" id="registerBtn"><span>注册</span></a>
+            <a href="javascript:;" id="registerBtn" @click="handleRegister"><span>注册</span></a>
         </div>
         <div class="register_div">
             <a href="login.html" class="register_text">
@@ -56,82 +61,125 @@
     </div>
 </div>
 
-<!-- 替换原注册逻辑的script代码 -->
 <script>
-    $(function() {
-        // 验证码倒计时逻辑（保持不变）
-        let countdown = 60;
-        $('#getCode').click(function() {
-            const phone = $('#phone').val().trim();
-            if (!phone || phone.length !== 11) {
-                alert('请输入有效的11位手机号');
-                return;
-            }
-            alert('验证码已发送，验证码为123456');
-            const codeBtn = $(this);
-            codeBtn.attr('disabled', true).css('opacity', 0.6);
-            const timer = setInterval(() => {
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    codeBtn.text('获取验证码').attr('disabled', false).css('opacity', 1);
-                    countdown = 60;
-                } else {
-                    codeBtn.text(`重新发送(${countdown}s)`);
-                    countdown--;
-                }
-            }, 1000);
-        });
+    const { createApp } = Vue;
 
-        // 注册逻辑（修正POST请求格式）
-        $('#registerBtn').click(function() {
-            const phone = $('#phone').val().trim();
-            const code = $('#code').val().trim();
-            const password = $('#password').val().trim();
-
-            // 表单验证（保持不变）
-            if (!phone || phone.length !== 11) {
-                alert('请输入有效的11位手机号');
-                return;
+    createApp({
+        data() {
+            return {
+                userName: '',
+                phone: '',
+                code: '',
+                password: '',
+                countdown: 60,
+                isCodeDisabled: false,
+                codeText: '获取验证码',
+                timer: null
             }
-            if (code !== '123456') {
-                alert('验证码错误，请输入123456');
-                return;
-            }
-            if (password.length < 6 || password.length > 16) {
-                alert('密码长度必须为6-16位');
-                return;
-            }
-
-            // 检查手机号是否已注册
-            $.get('http://localhost:3000/users?phone=' + phone, function(users) {
-                if (users.length > 0) {
-                    alert('该手机号已注册');
+        },
+        methods: {
+            getVerificationCode() {
+                const phone = this.phone.trim();
+                if (!phone || phone.length !== 11) {
+                    alert('请输入有效的11位手机号');
                     return;
                 }
 
-                // 发送POST请求到JSON Server（指定Content-Type）
-                $.ajax({
-                    url: 'http://localhost:3000/users',
-                    type: 'POST',
-                    contentType: 'application/json', // 关键：指定JSON格式
-                    data: JSON.stringify({ // 转换为JSON字符串
-                        phone: phone,
-                        password: password,
-                        registerTime: new Date().toLocaleString()
-                    }),
-                    success: function() {
-                        alert('注册成功！即将跳转到登录页');
-                        window.location.href = 'login.html';
-                    },
-                    error: function(xhr) {
-                        alert('注册失败：' + xhr.statusText);
+                alert('验证码已发送，验证码为123456');
+                this.isCodeDisabled = true;
+
+                this.timer = setInterval(() => {
+                    if (this.countdown <= 0) {
+                        clearInterval(this.timer);
+                        this.codeText = '获取验证码';
+                        this.isCodeDisabled = false;
+                        this.countdown = 60;
+                    } else {
+                        this.codeText = `重新发送(${this.countdown}s)`;
+                        this.countdown--;
                     }
-                });
-            }).fail(function(xhr) {
-                alert('查询失败：' + xhr.statusText);
-            });
-        });
-    });
+                }, 1000);
+            },
+            async handleRegister() {
+                const userName = this.userName.trim();
+                const phone = this.phone.trim();
+                const code = this.code.trim();
+                const password = this.password.trim();
+
+                // 用户名验证
+                if (!userName) {
+                    alert('请输入用户名');
+                    return;
+                }
+                if (userName.length > 20) {
+                    alert('用户名长度不能超过20个字符');
+                    return;
+                }
+
+                // 手机号验证
+                if (!phone || phone.length !== 11) {
+                    alert('请输入有效的11位手机号');
+                    return;
+                }
+
+                // 验证码验证
+                if (code !== '123456') {
+                    alert('验证码错误，请输入123456');
+                    return;
+                }
+
+                // 密码验证
+                if (password.length < 6 || password.length > 16) {
+                    alert('密码长度必须为6-16位');
+                    return;
+                }
+
+                try {
+                    // 检查手机号是否已注册
+                    const response = await fetch(`http://localhost:3000/users?phone=${phone}`);
+                    if (!response.ok) {
+                        throw new Error('查询失败: ' + response.statusText);
+                    }
+
+                    const users = await response.json();
+                    if (users.length > 0) {
+                        alert('该手机号已注册');
+                        return;
+                    }
+
+                    // 发送注册请求
+                    const registerResponse = await fetch('http://localhost:3000/users', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            userName: userName,
+                            phone: phone,
+                            password: password,
+                            registerTime: new Date().toLocaleString()
+                        })
+                    });
+
+                    if (!registerResponse.ok) {
+                        throw new Error('注册失败: ' + registerResponse.statusText);
+                    }
+
+                    alert('注册成功！即将跳转到登录页');
+                    window.location.href = 'login.html';
+
+                } catch (error) {
+                    alert(error.message);
+                }
+            }
+        },
+        beforeUnmount() {
+            // 清除定时器
+            if (this.timer) {
+                clearInterval(this.timer);
+            }
+        }
+    }).mount('#app');
 </script>
 </body>
 

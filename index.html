@@ -12,11 +12,246 @@
     <link rel="stylesheet" type="text/css" href="styles/iconfont/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="styles/index.css" />
     <link rel="stylesheet" type="text/css" href="styles/common.css" />
-    <script type="text/javascript" src="js/common.js"></script>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+
+        html {
+            font-size: 10vw;
+        }
+        @media (min-width: 540px) {
+            html {
+                font-size: 54px; /* 最大限制，避免在平板上过大 */
+            }
+        }
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; /* 优化滚动体验 */
+        }
+        .wrap {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 头部区域 - 适配手机屏幕 */
+        .header {
+            padding: 0.15rem 0.12rem; /* 使用rem单位 */
+        }
+        .address {
+            margin-bottom: 0.1rem;
+            font-size: 0.14rem;
+        }
+        .header input {
+            height: 0.44rem;
+            font-size: 0.16rem;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 0.1rem;
+            border-radius: 0.22rem; /* 圆角为高度一半 */
+        }
+        .search-words {
+            margin-top: 0.12rem;
+            gap: 0.1rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .search-word-item {
+            padding: 0.06rem 0.12rem;
+            font-size: 0.14rem;
+            border-radius: 0.15rem;
+            background-color: #f5f5f5;
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* 分类导航 - 适配手机屏幕 */
+        .menu_category ul {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0.15rem 0;
+            margin: 0;
+        }
+        .menu_category li {
+            width: 20%;
+            margin-bottom: 0.15rem;
+            list-style: none;
+            text-align: center;
+        }
+        .menu_category img {
+            width: 0.6rem;
+            height: 0.6rem;
+            margin-bottom: 0.08rem;
+            object-fit: contain; /* 保持图片完整显示 */
+        }
+        .menu_category p {
+            font-size: 0.14rem;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* banner区域 - 保持正确比例 */
+        .banner-container {
+            width: 100%;
+            position: relative;
+            padding-top: 56.25%; /* 16:9比例 */
+            overflow: hidden;
+        }
+        .banner-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 商家区域 - 适配手机屏幕 */
+        .shop .title {
+            padding: 0.15rem 0.12rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .shop .title h2 {
+            font-size: 0.18rem;
+            margin: 0;
+        }
+        .shop .title a {
+            font-size: 0.14rem;
+            color: #666;
+            text-decoration: none;
+        }
+        .shop_list {
+            padding: 0;
+            flex-grow: 1; /* 让商家列表区域填充剩余空间 */
+        }
+        .shop_list ul {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; /* 让两个商家均匀分布 */
+        }
+        .shop_list li {
+            margin: 0 0.12rem 0.15rem;
+            padding: 0.2rem; /* 增加内边距 */
+            background-color: #fff;
+            border-radius: 0.08rem;
+            box-shadow: 0 0.02rem 0.05rem rgba(0,0,0,0.05);
+            list-style: none;
+            flex-shrink: 0;
+        }
+        .shop_info {
+            display: flex;
+            align-items: center; /* 垂直居中对齐 */
+        }
+        .shop_img {
+            width: 1.2rem; /* 增大图片尺寸 */
+            height: 1.2rem;
+            border-radius: 0.05rem;
+            object-fit: cover;
+            margin-right: 0.15rem; /* 增加图片右侧间距 */
+        }
+        .shop_main {
+            flex: 1;
+            min-width: 0; /* 解决flex子元素内容溢出问题 */
+        }
+        .main_top h3 {
+            font-size: 0.18rem; /* 增大标题字体 */
+            margin: 0 0 0.08rem 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .main_desc {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.08rem;
+            font-size: 0.14rem;
+            color: #666;
+            gap: 0.05rem; /* 增加元素间间距 */
+        }
+        .main_desc img {
+            width: 1.20rem; /* 适当增大星星图标 */
+            height: 0.18rem;
+            margin-right: 0.03rem; /* 减少右侧间距 */
+            flex-shrink: 0; /* 防止图标被压缩 */
+        }
+        .main_desc .sale {
+            white-space: nowrap; /* 防止销量文本换行 */
+        }
+        .money_limit {
+            font-size: 0.14rem; /* 增大金额限制字体 */
+            color: #999;
+            margin-bottom: 0.08rem;
+            line-height: 1.6;
+        }
+        .main_price {
+            font-size: 0.14rem; /* 增大活动字体 */
+            margin-bottom: 0.05rem;
+        }
+        .act_icon {
+            display: inline-block;
+            padding: 0 0.05rem;
+            margin-right: 0.05rem;
+            border: 1px solid #ff4d4f;
+            color: #ff4d4f;
+            border-radius: 0.02rem;
+            font-size: 0.12rem;
+        }
+        .act_desc {
+            color: #ff4d4f;
+        }
+
+        /* 底部导航 - 固定在底部 */
+        .footer {
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            border-top: 1px solid #eee;
+            z-index: 100;
+        }
+        .footer ul {
+            display: flex;
+            margin: 0;
+            padding: 0.05rem 0 0.03rem;
+        }
+        .footer li {
+            flex: 1;
+            list-style: none;
+            text-align: center;
+        }
+        .footer a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.12rem;
+        }
+        .footer .iconfont {
+            font-size: 0.22rem;
+            margin-bottom: 0.03rem;
+        }
+        .footer .tabcur {
+            color: #ff6b00;
+        }
+    </style>
 </head>
 
 <body>
-<div class="wrap">
+<div id="app" class="wrap">
     <div class="container">
         <!-- 头部 start -->
         <header class="header">
@@ -36,6 +271,7 @@
             </div>
         </header>
         <!-- 头部 end -->
+
         <!-- 分类导航 start -->
         <nav class="menu_category">
             <ul>
@@ -102,9 +338,13 @@
             </ul>
         </nav>
         <!-- 分类导航 end -->
+
         <!-- banner start -->
-        <img src="images/banner/02.jpg" style="width: 100%;">
+        <div class="banner-container">
+            <img src="images/banner/02.jpg" alt="banner">
+        </div>
         <!-- banner end -->
+
         <!-- 附近商家 start -->
         <div class="shop">
             <nav class="title">
@@ -112,12 +352,40 @@
             </nav>
             <div class="shop_list">
                 <ul id="shopContainer">
-                    <!-- 商家信息将通过JS动态加载 -->
+                    <!-- 商家信息通过Vue动态加载 -->
+                    <li v-for="shop in displayShops" :key="shop.id">
+                        <a :href="`pages/shop.html?id=${shop.id}`">
+                            <div class="shop_info">
+                                <img :src="shop.imgUrl" class="shop_img">
+                                <div class="shop_main">
+                                    <div class="main_top">
+                                        <h3>{{ shop.name }}</h3>
+                                    </div>
+                                    <div class="main_more">
+                                        <div class="main_desc">
+                                            <img src="images/shop/star.png" alt="评分">
+                                            <span class="sale">月销{{ shop.monthSales }}+</span>
+
+                                        </div>
+                                        <div class="money_limit">
+                                            <span>{{ shop.minOrderAmount }}起送 | 配送费{{ shop.deliveryFee }}</span>
+                                            <span>{{ shop.distance }} | {{ shop.deliveryTime }}</span>
+                                        </div>
+                                        <div class="main_price" v-for="activity in shop.activities" :key="activity.id">
+                                            <span class="act_icon">{{ activity.type }}</span>
+                                            <span class="act_desc">{{ activity.desc }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
         <!-- 附近商家 end -->
     </div>
+
     <!-- 底部 start -->
     <footer class="footer">
         <ul>
@@ -146,72 +414,53 @@
     <!-- 底部 end -->
 </div>
 
-<!-- 在 </body> 标签前添加以下脚本 -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 接口地址改为 json-server 实际提供的 /shop_list
-        fetch('http://localhost:3000/shop_list')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('接口请求失败');
+    // 创建Vue实例
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                shops: [],
+                displayShops: []
+            }
+        },
+        mounted() {
+            // 页面加载完成后获取商家数据
+            this.fetchShopData();
+        },
+        methods: {
+            async fetchShopData() {
+                try {
+                    const response = await fetch('db.json'); // 修改为正确的本地文件路径
+                    if (!response.ok) {
+                        throw new Error('接口请求失败');
+                    }
+                    const data = await response.json(); // 先获取完整的JSON数据
+                    this.shops = data.shop_list; // 从shop_list字段提取商家数据
+
+                    // 转换数据格式以匹配模板中的绑定
+                    this.displayShops = this.shops.slice(0, 2).map(shop => ({
+                        id: shop.id,
+                        name: shop.name,
+                        imgUrl: shop.img, // 映射到db中的img字段
+                        monthSales: shop.sales.replace('月销', '').replace('+', ''), // 处理销量数据
+                        minOrderAmount: shop.deliveryInfo.minOrderAmount,
+                        deliveryFee: shop.deliveryInfo.deliveryFee,
+                        distance: shop.deliveryInfo.distance,
+                        deliveryTime: shop.deliveryInfo.time,
+                        activities: shop.activities.map((act, index) => ({
+                            id: index, // 为每个活动添加唯一标识
+                            type: act.type,
+                            desc: act.desc
+                        }))
+                    }));
+                } catch (error) {
+                    console.error('加载商家数据失败:', error);
                 }
-                return response.json();
-            })
-            .then(shops => {
-                // 获取商家列表的 UL 容器（原页面中是 shop_list 下的 ul）
-                const shopListUl = document.querySelector('.shop_list ul');
-                // 清空静态内容
-                shopListUl.innerHTML = '';
-
-                // 遍历接口返回的商家数据，动态生成 HTML
-                shops.forEach(shop => {
-                    // 生成活动信息（如“特价”“满减”等）
-                    let activitiesHtml = '';
-                    shop.activities.forEach(activity => {
-                        activitiesHtml += `
-            <div class="main_price">
-              <span class="act_icon">${activity.type}</span>
-              <span class="act_desc">${activity.desc}</span>
-            </div>
-          `;
-                    });
-
-                    // 生成单个商家的 HTML
-                    const shopHtml = `
-          <li>
-            <a href="pages/shop.html?id=${shop.id}">
-              <div class="shop_info">
-                <img src="${shop.imgUrl}" class="shop_img">
-                <div class="shop_main">
-                  <div class="main_top">
-                    <h3>${shop.name}</h3>
-                  </div>
-                  <div class="main_more">
-                    <div class="main_desc">
-                      <img src="images/shop/star.png" alt="">
-                      <span class="sale">月销${shop.monthSales}+</span>
-                    </div>
-                    <div class="money_limit">
-                      <span>${shop.minOrderAmount}起送 | 配送费${shop.deliveryFee}</span>
-                      <span>${shop.distance} | ${shop.deliveryTime}</span>
-                    </div>
-                    ${activitiesHtml}
-                  </div>
-                </div>
-              </div>
-            </a>
-          </li>
-        `;
-
-                    // 添加到列表中
-                    shopListUl.innerHTML += shopHtml;
-                });
-            })
-            .catch(error => {
-                console.error('加载商家数据失败:', error);
-                // 若失败，保留原静态内容（无需额外修改）
-            });
-    });
+            }
+        }
+    }).mount('#app');
 </script>
 </body>
 
